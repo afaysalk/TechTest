@@ -3,12 +3,18 @@ using System.Collections.Generic;
 
 namespace Questions
 {
-    // Améliorer le code de cette classe, ainsi que sa relation avec la classe Collaborateur.
-    public class Question
+    public class Question           //Injection Collaborateur via constructeur
     {
+        private readonly Collaborateur _collaborateur;
+
+        public Question(Collaborateur collaborateur)
+        {
+            _collaborateur = collaborateur;
+        }
+
         public void Traiter(List<string> listeContenu)
         {
-            List<string> listeContenuValide = null;
+            var listeContenuValide = new List<string>();
             string message = null;
             bool estValide = true;
 
@@ -16,12 +22,12 @@ namespace Questions
             {
                 if (estValide)
                 {
-                    estValide = Valider(contenu, message);
-                }              
+                    estValide = Valider(contenu, out message);
+                }
 
                 if (estValide && !listeContenuValide.Contains(contenu))
                 {
-                    listeContenuValide.Add(contenu.Substring(0,10));
+                    listeContenuValide.Add(contenu.Substring(0, 10));
                 }
             }
 
@@ -30,29 +36,28 @@ namespace Questions
                 throw new Exception(message);
             }
 
-            if(listeContenuValide.Count > 0)
+            if (listeContenuValide.Count > 0)
             {
-                listeContenuValide.ForEach(x => Collaborateur.AjouterContenuBD(x));
+                listeContenuValide.ForEach(x => _collaborateur.AjouterContenuBD(x));
             }
-
         }
 
-        private bool Valider(string contenu, string message)
+        private bool Valider(string contenu, out string message)  // check taille contenu et valeurs null/vide
         {
-            bool estValide = true;
-            if (contenu == "")
+            message = null;
+            if (string.IsNullOrEmpty(contenu))
             {
-                estValide = false;
                 message = "Le contenu ne peut être vide";
+                return false;
             }
 
-            if (estValide && contenu.Length > 10)
+            if (contenu.Length > 10)
             {
-                estValide = false;
                 message = "Le contenu est trop long";
+                return false;
             }
 
-            return estValide;
+            return true;
         }
     }
 }
