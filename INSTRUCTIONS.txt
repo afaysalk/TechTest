@@ -1,0 +1,60 @@
+﻿Partie 1 : Approche pilotée par les tests (Test-Driven Development, TDD)
+
+Description des requis:
+
+	Client
+		Créer un nouveau client
+			Valider que le nom d'utilisateur est renseigné
+			Vérifier que le nom n'est pas déjà utilisé par un autre client
+			Ajouter le client
+
+		Renommer un client
+			Valider que le nom d'utilisateur est renseigné
+			Valider que le client existe
+			Vérifier que le nom a changé
+			Vérifier que le nom n'est pas déjà utilisé par un autre client
+			Modifier le nom de l'utilisateur
+
+	Livre
+		Acheter un livre
+			Valider que le client existe
+			Valider que le montant est supérieur à 0
+			Valider que le livre existe
+			Vérifier qu'il reste au moins un exemplaire
+			Valider que le montant est égal ou supérieur à la valeur du livre
+			Réduire la quantité d'exemplaires du livre disponibles à la vente
+			Ajouter un exemplaire vendu du livre au client
+			Retourner le montant restant à la suite de l'achat
+
+		Rembourser un livre
+			Valider que le client existe
+			Valider que le client a déjà acheté au moins un exemplaire du livre
+			Valider que le livre existe
+			Ajuster la quantité d'exemplaires du livre disponibles à la vente
+			Supprimer un exemplaire vendu du livre au client
+			Retourner la valeur du livre
+
+
+Contenu inclus
+	Entité Client
+	Entité Livre
+	Interface du service de base de données, du service Client et du service Livre
+
+
+Ce qui doit être fait 
+	Créer un Service Client avec ses tests unitaires
+	Créer un Service Livre avec ses tests unitaires
+	S'assurer que les tests couvrent tous les requis ci-haut (validation par assertions).
+
+
+Particularités
+	La structure des entités Client et Livre ne doit pas être changée
+	Le service de base de données n'a pas à être codé; c'est inutile pour cet exercice
+	Les interfaces des services de base de données, Client et Livre ne doivent pas être changées
+	Le framework de test et la composante de mock sont à votre choix
+
+
+Partie 2 : Ré-usinage (Refactoring)
+
+Améliorer le code de la classe Question.cs, dans le projet Questions, pour corriger tous les problèmes
+et ajuster la relation avec la classe Collaborateur afin de l'utiliser en injection de dépendance.
